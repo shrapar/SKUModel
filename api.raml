@@ -1,0 +1,145 @@
+#%RAML 0.8
+title: SKU
+version: V1
+baseUri: http://api.sku/{version}/
+/electronics:
+  /mobile:
+    displayName: mobile
+    /make:
+      get:
+        description: Get Manufacturer details
+        queryParameters:
+          makeID:
+            displayName: makeid
+            type: integer
+            example: 1234
+            required: false
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "make":"Samsung",
+                    "makeid": 1234
+                  }
+      post:   
+        description: Create a new Manufacturer 
+        body:
+          application/json:
+            example: |
+              {
+                "make":"LG"
+              }
+    /model:
+      get:
+        description: Get model name
+        queryParameters:
+          modelID:
+            displayName: modelid
+            type: integer
+            example: 234
+            required: false
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "model":"Galaxy",
+                    "modelid": 234
+                  }
+      post:
+        description: Create a new model
+        body:
+          application/json:
+            example: |
+              {
+                "model":"Galaxy"
+              }  
+          
+    /item:
+      get:
+        description: Get item details
+        queryParameters:
+          modelID:
+            displayName: modelid
+            type: integer
+            example: 234
+            required: false
+          makeID:
+            displayName: makeid
+            type: integer
+            example: 234
+            required: false            
+      post:
+        description: Create new item
+        body:
+          application/json:
+            schema: |
+              {
+                "name":{
+                  "required": true,
+                  "type": "string"
+                },
+                "modelid":{
+                  "required": true,
+                  "type": "integer"
+                },
+                "makeid":{
+                  "required": true,
+                  "type": "integer"
+                },
+                "productid":{
+                  "required": true,
+                  "type": "integer"
+                },
+                "description":{
+                  "required": true,
+                  "type": "string"
+                },
+                "inventory start date":{
+                  "required": false,
+                  "type": "date"
+                },
+                "manufacturing date":{
+                  "required": true,
+                  "type": "date"
+                },
+                "sold date":{
+                  "required": false,
+                  "type": "date"
+                },
+                "rackid":{
+                  "required": false,
+                  "type": "string"
+                },
+                "price":{
+                  "required": true,
+                  "type": "float"
+                },
+                "color":{
+                  "required": true,
+                  "type": "string"
+                },
+                "SKUID":{
+                  "required": true,
+                  "type": "string"
+                }
+                                
+                
+              }
+            example: |
+              {
+                "makeid":123,
+                "modelid":2390,
+                "name":"Galaxy S2",
+                "productid":5678,
+                "description":"wide screen",
+                "color":"black",
+                "price":13000.00,
+                "manufacturing date":"12-06-2015",
+                "SKUID":32434-3232-b-34,
+              }
+      put:
+        description: Update item details
