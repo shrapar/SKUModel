@@ -13,32 +13,36 @@ mongoose.connect(url, function (error) {
 var schema = mongoose.Schema;
 
 //create a schema
-var makeSchema = new schema({
+var productSchema = new schema({
   id: String,
   name: { type: String, required: true, unique: true },
-  startYear: Date,
-  revenue: Number,
-  stockPrice: String,
-  hq: String
+  description: String,
+  skuId: String,
+  rackId: String,
+  inventoryStartDate: Date,
+  manufacturingDate: Date,
+  soldDate: Date,
+  price: Number,
+  color: String
   //updated_at: Date
 });
 
 // the schema is useless so far
 // we need to create a model using it
-var Make = mongoose.model('Make', makeSchema, 'makes');
+var product = mongoose.model('Product', productSchema, 'products');
 
 // make this available to our users in our Node applications
-//module.exports = Make;
+//module.exports = product;
 
 exports.list = function(req, res) {
-  //get all the makes
-  Make.find(function(err, makes) {
+  //get all the products
+  product.find(function(err, products) {
     if (err) {
     	res.send(err);
     } else {
-	    // object of all the makes
-	    console.log(makes);
-	    res.json(makes);
+	    // object of all the products
+	    console.log(products);
+	    res.json(products);
     }
   });
 };

@@ -1,0 +1,66 @@
+use sku_db
+
+Make - Manufacturer details
+Schema:
+Id
+Name
+Start Year
+Revenue
+Stock Price
+Headquarters
+
+db.makes.insert({'name':'LG Electronics', 'startYear':1958, 'revenue':'KRW 56.50 trillion', 'stockPrice':50000, 'hq':'Seoul, South Korea'})
+
+db.makes.insert({'name':'Samsung Electronics', 'startYear':1969, 'revenue':'KRW 200 trillion', 'stockPrice':150, 'hq':'Suwon, South Korea'})
+
+db.makes.insert({'name':'Hewlett-Packard', 'startYear':1939, 'revenue':'USD 111.454 billion', 'stockPrice':150, 'hq':'Palo Alto, California, United States'})
+
+db.makes.insert({'name':'Apple Inc', 'startYear':1976, 'revenue':'USD 233.715 billion ', 'stockPrice':150, 'hq':'Cupertino, California, United States'})
+
+db.makes.insert({'name':'Sony Corporation', 'startYear':1946, 'revenue':'JPY 8.105 trillion', 'stockPrice':150, 'hq':'Minato, Tokyo, Japan'})
+
+db.makes.insert({'name':'Nokia Corporation', 'startYear':1865, 'revenue':'EUR 23.22 billion', 'stockPrice':150, 'hq':'Espoo, Uusimaa, Finland'})
+
+
+Model -
+Schema:
+Id
+Name
+Description
+
+db.models.insert({'name':'iPhone','description':'Apple iPhone'})
+db.models.insert({'name':'G5','description':'LG G5 series'})
+db.models.insert({'name':'Mac book','description':'Apple Mac'})
+db.models.insert({'name':'K','description':'k series'})
+
+
+Product -
+Schema:
+Id
+Name
+Description
+MakeId
+ModelId
+SKUID
+RackId
+Inventory start date
+Manufacturing date
+Sold date
+Price
+Color
+
+db.products.insert({'name':'LG G5 Titan','description':'titan','makeId':{'$ref':'makes','$id':ObjectId("577e1e09e001a1a9b6300c16")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1d")},'SKUID':'lg-g5-1-1','rackId':'5234','inventoryStartDate':'09/01/2016','manufacturingDate':'02/11/2015','soldDate':'','price':'34000','color':'black'})
+
+db.products.insert({'name':'LG G5 Gold','description':'gold','makeId':{'$ref':'makes','$id':ObjectId("577e1e09e001a1a9b6300c16")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1d")},'SKUID':'lg-g5-1-2','rackId':'5234','inventoryStartDate':'09/01/2016','manufacturingDate':'02/11/2015','soldDate':'','price':'34000','color':'gold'})
+
+db.products.insert({'name':'LG K7 K332 Gold','description':'red','makeId':{'$ref':'makes','$id':ObjectId("577e1e09e001a1a9b6300c16")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1f")},'SKUID':'lg-k-1-2','rackId':'6234','inventoryStartDate':'09/01/2016','manufacturingDate':'02/11/2015','soldDate':'','price':'34000','color':'red'})
+
+db.products.insert({'name':'LG K10 LTE','description':'blue','makeId':{'$ref':'makes','$id':ObjectId("577e1e09e001a1a9b6300c16")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1f")},'SKUID':'lg-k-1-3','rackId':'5244','inventoryStartDate':'09/05/2016','manufacturingDate':'02/08/2015','soldDate':'','price':'3400','color':'blue'})
+
+db.products.insert({'name':'Apple iPhone 6s','description':'64gb','makeId':{'$ref':'makes','$id':ObjectId("577e1e26e001a1a9b6300c19")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1c")},'SKUID':'apple-iphone-1-1','rackId':'1234','inventoryStartDate':'09/01/2016','manufacturingDate':'02/11/2015','soldDate':'','price':'34000','color':'black'})
+
+db.products.insert({'name':'Apple iPhone 5s','description':'32gb','makeId':{'$ref':'makes','$id':ObjectId("577e1e26e001a1a9b6300c19")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1c")},'SKUID':'apple-iphone-1-2','rackId':'1235','inventoryStartDate':'09/03/2016','manufacturingDate':'02/12/2015','soldDate':'','price':'24000','color':'black'})
+
+db.products.insert({'name':'Apple iPhone 5s','description':'16gb','makeId':{'$ref':'makes','$id':ObjectId("577e1e26e001a1a9b6300c19")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1c")},'SKUID':'apple-iphone-1-3','rackId':'1235','inventoryStartDate':'09/03/2016','manufacturingDate':'18/12/2015','soldDate':'','price':'24000','color':'white'})
+
+db.products.insert({'name':'Apple Mac book pro','description':'8gb','makeId':{'$ref':'makes','$id':ObjectId("577e1e26e001a1a9b6300c19")},'modelId':{'$ref':'models','$id':ObjectId("577e1e4ee001a1a9b6300c1e")},'SKUID':'apple-mac-1-1','rackId':'2234','inventoryStartDate':'16/05/2016','manufacturingDate':'02/11/2015','soldDate':'','price':'94000','color':'black'})

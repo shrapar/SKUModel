@@ -13,26 +13,23 @@ mongoose.connect(url, function (error) {
 var schema = mongoose.Schema;
 
 //create a schema
-var makeSchema = new schema({
+var modelSchema = new schema({
   id: String,
   name: { type: String, required: true, unique: true },
-  startYear: Date,
-  revenue: Number,
-  stockPrice: String,
-  hq: String
+  description: String,
   //updated_at: Date
 });
 
 // the schema is useless so far
 // we need to create a model using it
-var Make = mongoose.model('Make', makeSchema, 'makes');
+var model = mongoose.model('Model', modelSchema, 'models');
 
 // make this available to our users in our Node applications
-//module.exports = Make;
+//module.exports = model;
 
 exports.list = function(req, res) {
   //get all the makes
-  Make.find(function(err, makes) {
+  model.find(function(err, makes) {
     if (err) {
     	res.send(err);
     } else {
