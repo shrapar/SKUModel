@@ -1,0 +1,31 @@
+extends layout.jade
+
+block content
+
+	.menu
+		h2 Menu
+		ul.nav.nav-pills
+			li
+				a(href="/makes") Make
+			li.active
+				a(href="/models") Model
+			li
+				a(href="/products") Products
+
+	h1= title
+
+	.list
+		div
+			table.table.table-striped
+				thead
+					tr
+						th No
+						th Name
+						th Description
+				tbody
+					each m, index in make
+						.item
+							tr
+								td= index+1
+								td= m.name
+								td= m.description

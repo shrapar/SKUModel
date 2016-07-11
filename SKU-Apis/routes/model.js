@@ -35,7 +35,11 @@ exports.list = function(req, res) {
     } else {
 	    // object of all the makes
 	    console.log(makes);
-	    res.json(makes);
+	    //res.json(makes);
+	    res.render('model.jade', {
+	        title: 'Models',
+	        make: makes || []
+	      });
     }
   });
 };

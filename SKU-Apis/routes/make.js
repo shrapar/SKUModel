@@ -17,8 +17,8 @@ var makeSchema = new schema({
   id: String,
   name: { type: String, required: true, unique: true },
   startYear: Date,
-  revenue: Number,
-  stockPrice: String,
+  revenue: String,
+  stockPrice: Number,
   hq: String
   //updated_at: Date
 });
@@ -38,7 +38,12 @@ exports.list = function(req, res) {
     } else {
 	    // object of all the makes
 	    console.log(makes);
-	    res.json(makes);
+	    //res.json(makes);
+	    //res.redirect("/make");
+	    res.render('make.jade', {
+	        title: 'Makes',
+	        make: makes || []
+	      });
     }
   });
 };
