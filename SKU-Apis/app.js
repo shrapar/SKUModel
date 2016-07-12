@@ -34,6 +34,11 @@ app.get('/', routes.index);
 app.get('/makes', make.list);
 app.get('/models', model.list);
 app.get('/products', product.list);
+app.get('/createproduct', function(req, res){
+	  res.render('createproduct.jade', {
+	    title: 'Product'
+	  });
+	});
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

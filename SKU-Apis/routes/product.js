@@ -17,7 +17,7 @@ var productSchema = new schema({
   id: String,
   name: { type: String, required: true, unique: true },
   description: String,
-  skuId: String,
+  SKUID: String,
   rackId: String,
   inventoryStartDate: Date,
   manufacturingDate: Date,
@@ -42,7 +42,11 @@ exports.list = function(req, res) {
     } else {
 	    // object of all the products
 	    console.log(products);
-	    res.json(products);
+	    //res.json(products);
+	    res.render('product.jade', {
+	        title: 'Products',
+	        products: products || []
+	      });
     }
   });
 };

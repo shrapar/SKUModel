@@ -1,0 +1,48 @@
+extends layout.jade
+
+block content
+
+	.menu
+		h2 Menu
+		ul.nav.nav-pills
+			li
+				a(href="/makes") Make
+			li
+				a(href="/models") Model
+			li.active
+				a(href="/products") Products
+
+	h1= title
+	//button(onclick="move()") Create Product
+	//script.
+	//	function move() {
+	//		window.location.href = '/createproduct'
+	//	}
+	a.btn.btn-primary( href="/createproduct" ) Create Product
+	.list
+		div
+			table.table.table-striped
+				thead
+					tr
+						th No
+						th SKUID
+						th Name
+						th Description
+						th Price
+						th Color
+						th Rack
+						th Manufacturing Date
+						th Sold Date
+				tbody
+					each product, index in products
+						.item
+							tr
+								td= index+1
+								td= product.SKUID
+								td= product.name
+								td= product.description
+								td= product.price
+								td= product.color
+								td= product.rackId
+								td= product.manufacturingDate
+								td= product.soldDate
