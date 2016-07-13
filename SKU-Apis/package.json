@@ -6,10 +6,15 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.0.6",
+    "express": "*",
     "body-parser": "*",
-    "ejs": "*",
-	"mongoose": "*",
-	"jade":"*"
+    "method-override": "*",
+    "errorhandler": "*",
+    "express-session": "*",
+    "morgan": "*",
+    "multer": "*",
+    "serve-favicon": "*",
+    "jade": "*",
+	"mongoose": "*"
   }
 }

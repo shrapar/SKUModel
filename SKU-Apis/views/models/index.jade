@@ -1,4 +1,4 @@
-extends layout.jade
+extends ../layout.jade
 
 block content
 
@@ -26,7 +26,7 @@ block content
 						th Stock Price
 						th Headquaters
 				tbody
-					each m, index in make
+					each m, index in models
 						.item
 							tr
 								td= index+1

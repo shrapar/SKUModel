@@ -1,13 +1,13 @@
-extends layout.jade
+extends ../layout.jade
 
 block content
 
 	.menu
 		h2 Menu
 		ul.nav.nav-pills
-			li
-				a(href="/makes") Make
 			li.active
+				a(href="/makes") Make
+			li
 				a(href="/models") Model
 			li
 				a(href="/products") Products
@@ -21,11 +21,17 @@ block content
 					tr
 						th No
 						th Name
-						th Description
+						th Start Date
+						th Revenue
+						th Stock Price
+						th Headquaters
 				tbody
-					each m, index in make
+					each m, index in makes
 						.item
 							tr
 								td= index+1
 								td= m.name
-								td= m.description
+								td= m.startYear
+								td= m.revenue
+								td= m.stockPrice
+								td= m.hq
