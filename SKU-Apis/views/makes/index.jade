@@ -1,5 +1,13 @@
 extends ../layout.jade
-
+append head
+	script(type='text/javascript')
+		$(document).ready(function() {
+		$("#tid").tablesorter(); 
+		});
+		$(document).ready(function() {
+		$("#tid").tablesorter({sortList: [[0,0], [1,0]]});
+		});
+    
 block content
 
 	.menu
@@ -16,7 +24,8 @@ block content
 
 	.list
 		div
-			table.table.table-striped
+			//table.table.table-striped
+			table.table.tablesorter#tid
 				thead
 					tr
 						th No
@@ -25,6 +34,7 @@ block content
 						th Revenue
 						th Stock Price
 						th Headquaters
+						//th.last
 				tbody
 					each m, index in makes
 						.item

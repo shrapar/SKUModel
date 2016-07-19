@@ -1,20 +1,25 @@
 {
-  "name": "SKU-Apis",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "express": "*",
-    "body-parser": "*",
-    "method-override": "*",
-    "errorhandler": "*",
-    "express-session": "*",
-    "morgan": "*",
-    "multer": "*",
-    "serve-favicon": "*",
-    "jade": "*",
-	"mongoose": "*"
-  }
+	"name": "SKU-Apis",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"express": "4.13.x",
+		"cfenv": "1.0.x",
+		"body-parser": "*",
+		"method-override": "*",
+		"errorhandler": "*",
+		"express-session": "*",
+		"morgan": "*",
+		"multer": "*",
+		"serve-favicon": "*",
+		"jade": "*",
+		"mongoose": "*"
+	},
+	"repository": {},
+	"engines": {
+		"node": "4.x"
+	} 
 }
