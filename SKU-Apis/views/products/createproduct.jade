@@ -9,15 +9,49 @@ block content
 				a(href="/makes") Make
 			li
 				a(href="/models") Model
-			li
+			li.active
 				a(href="/products") Products
 
 	h1= title
 
-	form.form-signin(action="/login", method="post")
-					h2.form-signin-heading Please sign in
-					input.input-block-level(type="text", name="username", placeholder="Email address")
-					input.input-block-level(type="password", name="password", placeholder="Password")
-					label.checkbox.
-						<input type="checkbox" value="remember-me" /> Remember me
-					button.btn.btn-large.btn-primary(type="submit") Sign in
+	.container.center_div
+		form(action="/createSKU", method="post")
+
+			label Make: 	
+			select(name='makes')
+				each make,index in makes
+					option(value=make._id)= make.name
+			br
+			label Model:
+			select(name='models')
+				each model,index in models
+					option(value=model._id)= model.name
+			br
+			label Name:
+			input.input-block-level(type="text", name="Name", placeholder="Name")
+			br
+			label Description:
+			input.input-block-level(type="text", name="Description", placeholder="Description")
+			br
+			label SKUID:			
+			input.input-block-level(type="text", name="SKUID", placeholder="SKUID")
+			br
+			label Rack ID:
+			input.input-block-level(type="text", name="Rack Id", placeholder="RackId")
+			br
+			label Inventory start date:
+			input.input-block-level(type="text", name="Inventory start date", placeholder="Inventory start date")
+			br
+			label Manufacturing date:			
+			input.input-block-level(type="text", name="Manufacturing date", placeholder="Manufacturing date")
+			br
+			label Sold date:
+			input.input-block-level(type="text", name="Sold date", placeholder="Sold date")
+			br
+			label Price:	
+			input.input-block-level(type="text", name="Price", placeholder="Price")
+			br
+			label Color:	
+			input.input-block-level(type="text", name="Color", placeholder="Color")
+			| <br> <br>
+			a.btn.btn-primary(type="submit") Create

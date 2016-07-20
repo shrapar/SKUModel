@@ -53,9 +53,29 @@ router.route('/products').get(function(req, res, next) {
 
 // Get new product page
 router.route('/createproduct').get(function(req, res) {
-	res.render('products/createproduct', {
-		title : 'Product'
-	});
-});
+	
+	 var List1 = mongoose.model('Make');
+	 var List2 = mongoose.model('Model');
 
+	 List1.find(function (err, makes) {
+	        List2.find(function (err, models) {
+	
+			// respond to both HTML and JSON. JSON responses require 'Accept:
+			// application/json;' in the Request Header
+			res.format({
+				// HTML response will render the index.jade file in the
+				// views/blobs folder. We are also setting "blobs" to be an
+				// accessible variable in our jade view
+				html : function() {
+					res.render('products/createproduct', {
+						title : 'Create SKU',
+						"makes" : makes,
+						"models" : models
+					});
+				}
+			});
+	        });
+	    });
+});
+	
 module.exports = router;
