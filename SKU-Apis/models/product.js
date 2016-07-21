@@ -5,11 +5,13 @@ var mongoose = require("mongoose");
 
 //create a schema
 var productSchema = new mongoose.Schema({
-  id: String,
+  //_id: String,
   name: { type: String, required: true, unique: true },
   description: String,
   SKUID: String,
   rackId: String,
+  make: { type: mongoose.Schema.Types.ObjectId, ref: 'Make' },
+  model: { type: mongoose.Schema.Types.ObjectId, ref: 'Model' },
   inventoryStartDate: Date,
   manufacturingDate: Date,
   soldDate: Date,
@@ -20,4 +22,4 @@ var productSchema = new mongoose.Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-mongoose.model('Product', productSchema, 'products');
+module.exports = mongoose.model('Product', productSchema, 'products');

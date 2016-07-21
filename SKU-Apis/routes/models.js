@@ -48,4 +48,30 @@ router.route('/models').get(function(req, res, next) {
 	});
 });
 
+//GET model by ID
+router.route('/models/:id').get(function(req, res, next) {
+	mongoose.model('Model').findById(req.param('id'), function(err, model) {
+		if (err) {
+			res.send(err);
+		} else {
+			// respond to both HTML and JSON. JSON responses require 'Accept:
+			// application/json;' in the Request Header
+			res.format({
+				// HTML response will render the index.jade file in the
+				// views/blobs folder. We are also setting "blobs" to be an
+				// accessible variable in our jade view
+				html : function() {
+					res.render('models/index', {
+						title : 'All Models',
+						"models" : model
+					});
+				},
+				// JSON response will show all blobs in JSON format
+				json : function() {
+					res.json(model);
+				}
+			});
+		}
+	});
+});
 module.exports = router;

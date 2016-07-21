@@ -48,4 +48,19 @@ router.route('/makes').get(function(req, res, next) {
 	});
 });
 
+//GET make by Id
+router.route('/makes/:id').get(function(req, res) {
+	var id = req.params.id;
+	console.log(id);
+	mongoose.model('Make').findById(id, function(err, make) {
+		if (err) {
+			res.send(err);
+		} else {
+			console.log(make);
+			// JSON response will show all blobs in JSON format
+			res.json(make);
+		}
+	});
+});
+
 module.exports = router;

@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 
 //create a schema
 var modelSchema = new mongoose.Schema({
-  id: String,
+  _id: String,
   name: { type: String, required: true, unique: true },
   description: String,
   //updated_at: Date
@@ -13,4 +13,4 @@ var modelSchema = new mongoose.Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-mongoose.model('Model', modelSchema, 'models');
+module.exports = mongoose.model('Model', modelSchema, 'models');
