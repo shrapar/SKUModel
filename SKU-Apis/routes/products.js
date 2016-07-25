@@ -97,9 +97,34 @@ router.route('/products').get(
 							res.send(err);
 						} else {
 							console.log("Created successfully!");
-							res.json({
-								status : 'success',
-								message : "Product created successfully!"
+							res.format({
+								// HTML response will render the index.jade file
+								// in the
+								// views/blobs folder. We are also setting
+								// "blobs" to be an
+								// accessible variable in our jade view
+								html : function() {
+									var List1 = mongoose.model('Make');
+									var List2 = mongoose.model('Model');
+
+									List1.find(function (err, makes) {
+										List2.find(function (err, models) {
+												
+													res.render('products/createproduct', {
+														title : 'Create SKU',
+														"makes" : makes,
+														"models" : models,
+														"message" : "SKU created successfully"
+													});
+												
+										        });
+									    });
+								},
+								// JSON response will show all blobs in JSON
+								// format
+								json : function() {
+									res.json(products);
+								}
 							});
 						}
 					}); // end product.save

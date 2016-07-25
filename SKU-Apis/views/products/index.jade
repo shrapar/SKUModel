@@ -1,5 +1,12 @@
 extends ../layout.jade
-
+append head
+	script
+		$(document).ready(function () {   
+		var table = $('#tid').DataTable();
+		$('#users tbody').on('click', 'tr', function () {
+		console.log(table.row(this).data())
+		});
+		});
 block content
 
 	.menu
@@ -13,15 +20,11 @@ block content
 				a(href="/products") Products
 
 	h1= title
-	//button(onclick="move()") Create Product
-	//script.
-	//	function move() {
-	//		window.location.href = '/createproduct'
-	//	}
+
 	a.btn.btn-primary( href="/createproduct" ) Create Product
 	.list
 		div
-			table.table.table-striped
+			table.table.table-striped.display#tid
 				thead
 					tr
 						th No
@@ -34,6 +37,7 @@ block content
 						th Manufacturing Date
 						th Inventory Start Date
 						th Sold Date
+						//th Update
 				tbody
 					each product, index in products
 						.item
@@ -48,3 +52,4 @@ block content
 								td= product.manufacturingDate
 								td= product.inventoryStartDate
 								td= product.soldDate
+								//td a.btn.btn-primary( href="/createproduct" ) Update

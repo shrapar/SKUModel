@@ -13,7 +13,7 @@ block content
 				a(href="/products") Products
 
 	h1= title
-
+	p= message
 	.container.center_div
 		form(action="/products", method="post")
 
@@ -54,4 +54,4 @@ block content
 			label Color:	
 			input.input-block-level(type="text", name="color", placeholder="Color")
 			| <br> <br>
-			a.btn.btn-primary(type="submit") Create
+			button.btn.btn-primary(type="submit") Create
