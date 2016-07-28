@@ -40,21 +40,19 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
-var makes = require('./routes/makes'),
-    make = require('./models/make');
+var makes = require('./routes/makes');
 app.get('/makes', makes);
 app.get('/makes/:id', makes);
 
-var models = require('./routes/models'),
-    model = require('./models/model');
+var models = require('./routes/models');
 app.get('/models', models);
 app.get('/models/:id', models);
 
-var products = require('./routes/products'),
-    product = require('./models/product');
+var products = require('./routes/products');
 app.get('/products', products);
 app.get('/createproduct', products);
 app.post('/products', products);
+app.put('/products/:id', products);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
