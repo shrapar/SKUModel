@@ -31,7 +31,17 @@ router.use(methodOverride(function(req, res) {
 // get all the Products
 router.route('/products')
 .get(function(req, res, next) {
-	Product.find().populate('Make', 'make').populate('Model', 'model').exec(function(err, products) {
+	var makeSearch = req.query.makeId;
+	var modelSearch = req.query.modelId;
+	var queryStr = {};
+	if (makeSearch) {
+		queryStr.makeId = makeSearch;
+	}
+	if (modelSearch) {
+		queryStr.modelId = modelSearch;
+	}
+	console.log(queryStr);
+	Product.find(queryStr).populate('makeId').populate('modelId').exec(function(err, products) {
 		if (err) {
 			res.send(err);
 		} else {
@@ -62,6 +72,8 @@ router.route('/products')
 // POST a new product
 .post(function(req, res) {
 	console.log('In POST - Req body');
+
+	//Setup the new product to add
 	var newProduct = new Product();
 	newProduct.name = req.body.name;
 	newProduct.description = req.body.description;
@@ -72,64 +84,57 @@ router.route('/products')
 	newProduct.soldDate = req.body.soldDate;
 	newProduct.price = req.body.price;
 	newProduct.color = req.body.color;
-	Make.findOne(req.body.make, function(err, make1) {
+
+	console.log('Make : ' + req.body.makeId);
+	newProduct.makeId = {
+			"$ref" : "makes",
+			"_id" : req.body.makeId
+		};
+
+	console.log('Model : ' + req.body.modelId);
+	newProduct.modelId = {
+			"$ref" : "models",
+			"_id" : req.body.modelId
+		};
+
+	console.log(newProduct);
+	newProduct.save(function(err, newPro) {
 		if (err) {
+			err.stack = undefined;
+			console.log(err);
 			res.send(err);
 		} else {
-			Model.findOne(req.body.model, function(err, model1) {
-				if (err) {
-					res.send(err);
-				} else {
-					newProduct.make = {
-						"$ref" : "makes",
-						"_id" : make1._id
-					};
-					newProduct.model = {
-						"$ref" : "models",
-						"_id" : model1._id
-					};
-					console.log(newProduct);
-					newProduct.save(function(err, newPro) {
-						if (err) {
-							console.log(err);
-							res.send(err);
-						} else {
-							console.log("Created successfully!");
-							res.format({
-								// HTML response will render the index.jade file
-								// in the
-								// views/blobs folder. We are also setting
-								// "blobs" to be an
-								// accessible variable in our jade view
-								html : function() {
-									var List1 = mongoose.model('Make');
-									var List2 = mongoose.model('Model');
+			console.log("Created successfully!");
+			res.format({
+				// HTML response will render the index.jade file
+				// in the
+				// views/blobs folder. We are also setting
+				// "blobs" to be an
+				// accessible variable in our jade view
+				html : function() {
+					var List1 = mongoose.model('Make');
+					var List2 = mongoose.model('Model');
 
-									List1.find(function (err, makes) {
-										List2.find(function (err, models) {
-												
-													res.render('products/createproduct', {
-														title : 'Create SKU',
-														"makes" : makes,
-														"models" : models,
-														"message" : "SKU created successfully"
-													});
-												
-										        });
-									    });
-								},
-								// JSON response will show all blobs in JSON
-								// format
-								json : function() {
-									res.json(products);
-								}
+					List1.find(function (err, makes) {
+						List2.find(function (err, models) {
+							res.render('products/createproduct', {
+								title : 'Create SKU',
+								"makes" : makes,
+								"models" : models,
+								"message" : "SKU created successfully"
 							});
-						}
-					}); // end product.save
+						
+				        });
+				    });
+				},
+				// JSON response will show all blobs in JSON
+				// format
+				json : function() {
+					res.json(products);
 				}
 			});
 		}
-	});
+	}); // end product.save
 });
 
 //Update a product
@@ -155,7 +160,7 @@ router.route('/products/:id').put(function(req, res) {
 
 // Get new product page
 router.route('/createproduct').get(function(req, res) {
-	
+
 	 var List1 = mongoose.model('Make');
 	 var List2 = mongoose.model('Model');
 

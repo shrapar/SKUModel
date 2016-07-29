@@ -18,12 +18,12 @@ block content
 		form(action="/products", method="post")
 
 			label Make: 	
-			select(name='makes')
+			select(name='makeId')
 				each make,index in makes
 					option(value=make._id)= make.name
 			br
 			label Model:
-			select(name='models')
+			select(name='modelId')
 				each model,index in models
 					option(value=model._id)= model.name
 			br
