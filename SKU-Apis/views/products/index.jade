@@ -1,13 +1,31 @@
 extends ../layout.jade
-append head
-	script
-		$(document).ready(function () {   
-		var table = $('#tid').DataTable();
-		$('#users tbody').on('click', 'tr', function () {
-		console.log(table.row(this).data())
-		});
-		});
+
 block content
+	script(src='jquery-latest.js', type="text/javascript")
+	script(language='JavaScript').
+		$(function(){
+			$(".edit").click(function(event){
+				var $this = $(this);
+				var text = $this.text();
+				var pid = "."+event.target.id;
+			
+				if(text=="Edit"){
+					$this.text("Cancel");
+					$(pid).replaceWith(function(){
+						
+						 return $("<input type='text' class="+this.className+" value='"+$(this).html()  +"'  name='"+this.id +"'/>").val($(this).html());
+					});
+				}
+				else{
+					$this.text("Edit");
+					$(pid).replaceWith(function(){
+						
+						return $('<span class='+this.className+' id='+this.name +'/>').append(this.value);
+					});
+				}
+				
+			});
+		});
 
 	.menu
 		h2 Menu
@@ -21,35 +39,81 @@ block content
 
 	h1= title
 
-	a.btn.btn-primary( href="/createproduct" ) Create Product
+	div.container
+		div.row
+			div.col.md8
+				form(action="/products", method="get")
+					div.span3
+						label Make: 	
+						select(name='makeId')
+							each make,index in makes
+								option(value=make._id)= make.name
+					div.span2
+						label Model:
+						select(name='modelId')
+							each model,index in models
+								option(value=model._id)= model.name
+					
+					div.span2
+						button.btn.btn-link.glyphicon.glyphicon-search(type="submit") Search
+				
+				//div.span2.offset8	
+				a.glyphicon.glyphicon-plus( href="/createproduct" ) New
+	br
 	.list
-		div
-			table.table.table-striped.display#tid
-				thead
-					tr
-						th No
-						th SKUID
-						th Name
-						th Description
-						th Price
-						th Color
-						th Rack
-						th Manufacturing Date
-						th Inventory Start Date
-						th Sold Date
-						//th Update
-				tbody
-					each product, index in products
-						.item
-							tr
-								td= index+1
-								td= product.SKUID
-								td= product.name
-								td= product.description
-								td= product.price
-								td= product.color
-								td= product.rackId
-								td= product.manufacturingDate
-								td= product.inventoryStartDate
-								td= product.soldDate
-								//td a.btn.btn-primary( href="/createproduct" ) Update
+		div.container
+			div.row
+				div.col.md12
+					div.panel.panel-default
+						div.panel-heading.panel-primary
+							div.row
+								h4
+									div.span1
+									div.span1 No
+									div.span2 SKUID
+									div.span2 Name
+									div.span2 Make
+									div.span2 Model
+						div.panel-body
+							each product, index in products
+								.item
+									form(action="/products/"+product._id, method="post")
+										div.row-fluid
+											//div.accordion-toggle(data-toggle="collapse", data-target="##{product.SKUID}")
+											div.span1.glyphicon.glyphicon-plus-sign(data-toggle="collapse", data-target="##{product.SKUID}")
+											div.span1= index+1
+											div.span2= product.SKUID
+											div.span2= product.name
+											div.span2= product.makeId.name
+											div.span2= product.modelId.name
+											//onclick='editproduct(product._id)'		
+										div.row-fluid.collapse.in(id=product.SKUID)
+											div.span8.offset2
+												label Description:  
+												span2(class="#{product._id}", id="description")= product.description
+												//input.editable_textarea(type="text" name="description" readOnly="true" value="#{product.description}")
+												br
+												label Price: 
+												span2(class="#{product._id}", id="price")= product.price
+												//input.editable_textarea#price= product.price
+												br
+												label Color: 
+												span2(class="#{product._id}", id="color")= product.color
+												br
+												label Rack Id: 
+												span2(class="#{product._id}", id="rackId")= product.rackId
+												br
+												label Manufacturing Date: 
+												span2(class="#{product._id}", id="manufacturingDate")= product.manufacturingDate
+												br
+												label Inventory Start Date: 
+												span2(class="#{product._id}", id="inventoryStartDate")= product.inventoryStartDate
+												br
+												label Sold Date: 
+												span2(class="#{product._id}", id="soldDate")= product.soldDate
+												br
+											div.span2
+												button.btn.btn-link.edit.glyphicon.glyphicon-edit(id="#{product._id}", type="button") Edit
+											div.span1
+												button.btn.btn-link.glyphicon.glyphicon-save(type="submit") Save
+									hr

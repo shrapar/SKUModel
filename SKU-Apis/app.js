@@ -9,8 +9,8 @@ var express = require('express')
   , path = require('path');
 
 var mongoose = require("mongoose");
-//var url = 'mongodb://159.8.150.174:27017/sku_db';
 var url = 'mongodb://localhost:27017/sku_db';
+//var url = 'mongodb://skudbuser:test4pass@159.8.150.174:27017/sku_db';
 
 //Mongoose connection to MongoDB
 mongoose.connect(url, function (error) {
@@ -52,7 +52,7 @@ var products = require('./routes/products');
 app.get('/products', products);
 app.get('/createproduct', products);
 app.post('/products', products);
-app.put('/products/:id', products);
+app.post('/products/:id', products);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

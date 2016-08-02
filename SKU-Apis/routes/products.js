@@ -55,9 +55,18 @@ router.route('/products')
 				// "blobs" to be an
 				// accessible variable in our jade view
 				html : function() {
-					res.render('products/index', {
-						title : 'All Products',
-						"products" : products
+					var List1 = mongoose.model('Make');
+					var List2 = mongoose.model('Model');
+
+					List1.find(function (err, makes) {
+						List2.find(function (err, models) {
+							res.render('products/index', {
+								title : 'All Products',
+								"makes" : makes,
+								"models" : models,
+								"products" : products
+							});
+						});
 					});
 				},
 				// JSON response will show all blobs in JSON
@@ -138,7 +147,7 @@ router.route('/products')
 });
 
 //Update a product
-router.route('/products/:id').put(function(req, res) {
+router.route('/products/:id').post(function(req, res) {
 	var productToUpdate = new Product();
 	productToUpdate._id = req.params.id;
 	productToUpdate.name = req.body.name;
@@ -154,7 +163,15 @@ router.route('/products/:id').put(function(req, res) {
 	    if (err) {
 	    	return res.send(500, { error: err });
 	    }
-	    return res.send("Succesfully updated!");
+		res.format({
+			
+			html : function() {
+				res.redirect("back");
+			},
+			json : function() {
+				return res.send("Succesfully updated!");
+			}
+		});
 	});
 });
 
