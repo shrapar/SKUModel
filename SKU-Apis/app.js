@@ -9,8 +9,8 @@ var express = require('express')
   , path = require('path');
 
 var mongoose = require("mongoose");
-var url = 'mongodb://localhost:27017/sku_db';
-//var url = 'mongodb://skudbuser:test4pass@159.8.150.174:27017/sku_db';
+//var url = 'mongodb://localhost:27017/sku_db';
+var url = 'mongodb://skudbuser:test4pass@159.8.150.174:27017/sku_db';
 
 //Mongoose connection to MongoDB
 mongoose.connect(url, function (error) {

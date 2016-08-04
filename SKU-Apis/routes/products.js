@@ -107,7 +107,7 @@ router.route('/products')
 		};
 
 	console.log(newProduct);
-	newProduct.save(function(err, newPro) {
+	newProduct.save(function(err, newProduct) {
 		if (err) {
 			err.stack = undefined;
 			console.log(err);
@@ -139,7 +139,7 @@ router.route('/products')
 				// JSON response will show all blobs in JSON
 				// format
 				json : function() {
-					res.json(products);
+					res.json(newProduct);
 				}
 			});
 		}

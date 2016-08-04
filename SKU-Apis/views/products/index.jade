@@ -46,11 +46,13 @@ block content
 					div.span3
 						label Make: 	
 						select(name='makeId')
+							option(value='NONE')= 'All'
 							each make,index in makes
 								option(value=make._id)= make.name
 					div.span2
 						label Model:
 						select(name='modelId')
+							option(value='NONE')= 'All'
 							each model,index in models
 								option(value=model._id)= model.name
 					
