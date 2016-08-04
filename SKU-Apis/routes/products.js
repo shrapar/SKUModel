@@ -34,10 +34,10 @@ router.route('/products')
 	var makeSearch = req.query.makeId;
 	var modelSearch = req.query.modelId;
 	var queryStr = {};
-	if (makeSearch) {
+	if (makeSearch && makeSearch !== 'NONE') {
 		queryStr.makeId = makeSearch;
 	}
-	if (modelSearch) {
+	if (modelSearch && modelSearch !== 'NONE') {
 		queryStr.modelId = modelSearch;
 	}
 	console.log(queryStr);
