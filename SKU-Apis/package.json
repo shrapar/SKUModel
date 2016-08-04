@@ -10,6 +10,7 @@
 		"cfenv": "1.0.x",
 		"body-parser": "*",
 		"method-override": "*",
+	    "moment": "^2.14.1",
 		"errorhandler": "*",
 		"express-session": "*",
 		"morgan": "*",

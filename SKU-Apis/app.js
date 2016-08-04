@@ -21,6 +21,7 @@ mongoose.connect(url, function (error) {
 
 var routes = require('./routes/index');
 var app = express();
+app.locals.moment = require('moment');
 
 // all environments
 app.set('port', process.env.PORT || 3000);

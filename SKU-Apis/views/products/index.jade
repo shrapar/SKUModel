@@ -104,13 +104,13 @@ block content
 												span2(class="#{product._id}", id="rackId")= product.rackId
 												br
 												label Manufacturing Date: 
-												span2(class="#{product._id}", id="manufacturingDate")= product.manufacturingDate
+												span2(class="#{product._id}", id="manufacturingDate")= (product.manufacturingDate != '') ? moment(product.manufacturingDate).format("MMM Do YYYY") : ''
 												br
 												label Inventory Start Date: 
-												span2(class="#{product._id}", id="inventoryStartDate")= product.inventoryStartDate
+												span2(class="#{product._id}", id="inventoryStartDate")= (product.inventoryStartDate != '') ? moment(product.inventoryStartDate).format("MMM Do YYYY") : ''
 												br
 												label Sold Date: 
-												span2(class="#{product._id}", id="soldDate")= product.soldDate
+												span2(class="#{product._id}", id="soldDate")= (product.soldDate != '') ? moment(product.soldDate).format("MMM Do YYYY") : ''
 												br
 											div.span2
 												button.btn.btn-link.edit.glyphicon.glyphicon-edit(id="#{product._id}", type="button") Edit
